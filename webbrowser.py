@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-import time
+from time import sleep
 
 
 class WebBrowser:
@@ -28,16 +28,23 @@ class WebBrowser:
     def get_element(self, filter, filter_str):
         return self._driver.find_element(filter, filter_str)
 
-    def highlight_element(self, element):
+    def highlight_element(self, element, highlight_amount=3):
         """Blinks a red border around a Selenium WebElement."""
         original_style = self._driver.execute_script("return arguments[0].getAttribute('style')", element)
-        for _ in range(3):
+        for _ in range(highlight_amount):
             self._driver.execute_script("arguments[0].style.border='3px solid red'", element)
-            time.sleep(.4)
+            sleep(.4)
             self._driver.execute_script("arguments[0].style.border='none'", element)
-            time.sleep(.3)
+            sleep(.3)
         self._driver.execute_script("arguments[0].setAttribute('style', arguments[1])", element, original_style or "")
 
     def __del__(self):
         self._driver.quit()
 
+    def input_to_element(self, filter, filter_str, input_str, delay=0.15, highlight_before=0):
+        el = self.get_element(filter, filter_str)
+        if highlight_before:
+            self.highlight_element(el, highlight_before)
+        for char in input_str:
+            el.send_keys(char)
+            sleep(delay)
