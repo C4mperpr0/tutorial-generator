@@ -1,13 +1,17 @@
-from webbrowser import WebBrowser 
+from tutorialbrowser import TutorialBrowser 
+from gotty import Gotty
 from selenium.webdriver.common.by import By
 from time import sleep
 import json
+
 
 # don't forget to create credentials.json with your username and password
 with open('credentials.json') as file:
     credentials = json.loads(file.read())
 
-with WebBrowser() as w:
+with TutorialBrowser() as w:
+
+    """
     # open page
     w.get("https://bellgardt.dev")
     sleep(5)
@@ -30,6 +34,21 @@ with WebBrowser() as w:
     el = w.get_element(By.CLASS_NAME, 'btn-confirm')
     w.highlight_element(el, 2)
     el.click()
+    sleep(3)
+
+    """
+
+    with Gotty(w) as g:
+        print("started")
+        sleep(3)
+
+        print("start")
+        g.run("speedtest-cli")
+        print("end")
+
+        sleep(30)
+
+
 
     sleep(50)
 

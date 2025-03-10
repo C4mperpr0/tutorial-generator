@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from time import sleep
 
 
-class WebBrowser:
+class TutorialBrowser:
     def __init__(self, driver=webdriver.Firefox):
         # Set up the WebDriver (make sure you have the correct driver installed)
         self._driver = driver()

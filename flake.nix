@@ -18,7 +18,11 @@
       default = pkgs.mkShell {
         venvDir = ".venv";
         packages = with pkgs;
-          [python312]
+          [
+            python312
+            bash
+            gotty
+          ]
           ++ (with pkgs.python312Packages; [
             selenium
             pip
