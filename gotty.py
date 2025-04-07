@@ -1,7 +1,6 @@
 from os import system
 from threading import Thread 
 from selenium.webdriver.common.by import By
-from time import sleep
 
 class Gotty:
     def __init__(self, webbrowser, port=8080, terminal="bash"):
@@ -30,7 +29,7 @@ class Gotty:
         return False 
 
     def run(self, cmd):
-        self._webbrowser.input_to_element(By.CLASS_NAME, "xterm-helper-textarea", cmd + "\n")
+        self._webbrowser.input_to_element(By.CLASS_NAME, "xterm-helper-textarea", cmd + "\n", delay=0.05)
         print("Run cmd done!")
 
 
